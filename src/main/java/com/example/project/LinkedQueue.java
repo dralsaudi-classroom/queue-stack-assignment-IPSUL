@@ -26,12 +26,17 @@ public class LinkedQueue<T> implements Queue<T>{
         }
         size++;
     }
-    public T serve() {
-        T x = head.data;
-        head = head.next;
-        size--;
-        if(size == 0)
-            tail = null;
-        return x;
+public T serve() {
+    if (empty()) {
+        throw new IllegalStateException("Queue is empty");
     }
+    T x = head.data;
+    head = head.next;
+    size--;
+    if (size == 0) {
+        tail = null;
+    }
+    return x;
+}
+
 }
