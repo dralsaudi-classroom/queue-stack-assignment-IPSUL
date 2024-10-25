@@ -18,9 +18,13 @@ public class LinkedStack<T> implements Stack<T> {
         tmp.next = top;
         top = tmp;
     }
-    public T pop() {
-        T e = top.data;
-        top = top.next;
-        return e;
+public T pop() {
+    if (empty()) {
+        throw new IllegalStateException("Stack is empty");
     }
+    T item = top.data;
+    top = top.next;
+    return item;
+}
+
 }
