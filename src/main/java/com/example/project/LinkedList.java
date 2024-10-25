@@ -54,13 +54,32 @@ public class LinkedList<T> implements List<T>{
             current = current.next;
         }
     }
-    public T mostFrequentElement() {
+
+public T mostFrequentElement() {
         throw new UnsupportedOperationException("Not supported yet.");
-        //         Write the method mostFrequentElement, member of the class LinkedList, that returns
-        // the most frequent element in the list. The most frequent element is the element
-        // appearing the highest number of times. If one or more element appear the same
-        // number of times, the one encountered earlier is returned.
-        // Example 1.1. Given the list l : A, B, C, B, C, D, E, mostFrequentElement() returns
-        // B.
+    if (empty()) {
+        return null; // or throw exception
     }
+    
+    Map<T, Integer> frequencyMap = new HashMap<>();
+    Node<T> temp = head;
+
+    while (temp != null) {
+        frequencyMap.put(temp.data, frequencyMap.getOrDefault(temp.data, 0) + 1);
+        temp = temp.next;
+    }
+
+    T mostFrequent = null;
+    int maxCount = 0;
+
+    for (Map.Entry<T, Integer> entry : frequencyMap.entrySet()) {
+        if (entry.getValue() > maxCount) {
+            maxCount = entry.getValue();
+            mostFrequent = entry.getKey();
+        }
+    }
+
+    return mostFrequent;
+}
+
 }
