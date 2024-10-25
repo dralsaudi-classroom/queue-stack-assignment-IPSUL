@@ -17,9 +17,13 @@ public class ArrayStack<T> implements Stack<T> {
     public boolean full(){
         return top == maxsize - 1;
     }
-    public void push(T e){
-        nodes[++top] = e;
+ public void push(T e) {
+    if (full()) {
+        throw new IllegalStateException("Stack is full");
     }
+    nodes[++top] = e;
+}
+
     public T pop(){
         return nodes[top--];
     }

@@ -20,11 +20,15 @@ public class ArrayQueue<T> implements Queue<T> {
     public int length () {
         return size;
     }
-    public void enqueue(T e) {
-        nodes[tail] = e;
-        tail = (tail + 1) % maxsize;
-        size++;
+ public void enqueue(T e) {
+    if (full()) {
+        throw new IllegalStateException("Queue is full");
     }
+    nodes[tail] = e;
+    tail = (tail + 1) % maxsize;
+    size++;
+}
+
     public T serve () {
         T e = nodes[head];
         head = (head + 1) % maxsize;
